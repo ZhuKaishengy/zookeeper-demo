@@ -47,7 +47,7 @@ public class ZkClientApi {
      */
     @Test
     public void testCreateNode() throws KeeperException, InterruptedException {
-        String resp = zkClient.create("/test", "test".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        String resp = zkClient.create("/test", "zks".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         System.out.println(resp);
     }
 
@@ -59,8 +59,8 @@ public class ZkClientApi {
     @Test
     public void getChildNode() throws KeeperException, InterruptedException {
         /// 在watcher中处理逻辑
-//        List<String> childrenNodes = zkClient.getChildren("/", true);
-//        System.out.println(childrenNodes);
+        List<String> childrenNodes = zkClient.getChildren("/", true);
+        System.out.println(childrenNodes);
         // 挂起程序，验证监听
         Thread.sleep(Long.MAX_VALUE);
     }

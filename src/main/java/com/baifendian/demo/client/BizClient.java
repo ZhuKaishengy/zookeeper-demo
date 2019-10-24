@@ -18,6 +18,9 @@ public class BizClient {
     private static volatile List<String> serverList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
+
+        BizClient bizClient = new BizClient();
+
         // connect and listen
         zooKeeper = ZkUtils.connect(watchedEvent -> {
             try {
@@ -28,13 +31,12 @@ public class BizClient {
                     servers.add(data);
                 }
                 serverList = servers;
+                // biz process
+                bizClient.processBiz();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-        BizClient bizClient = new BizClient();
-        // biz process
-        bizClient.processBiz();
         // mock server
         Thread.sleep(Long.MAX_VALUE);
     }
